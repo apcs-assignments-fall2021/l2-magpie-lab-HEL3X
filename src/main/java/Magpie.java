@@ -154,8 +154,8 @@ public class Magpie
      */
     public String transformIYouStatement(String statement)
     {
-        int a = statement.indexOf("I");
-        int b = statement.indexOf("you");
+        int a=statement.indexOf("I");
+        int b=statement.indexOf("you");
         String out = statement.substring(a+2,b);
         return "Why do you " + out + "me?";
     }
