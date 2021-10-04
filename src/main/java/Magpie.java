@@ -34,39 +34,46 @@ public class Magpie
     public String getResponse(String statement)
     {
         String response = "";
-        if (findWord(statement, "no") >= 0)
+        if (findWord(statement,"no") >= 0)
         {
             response = "Why so negative?";
         }else if (statement.contains("I want")){
-            System.out.println(transformIWantStatement(statement));
-        }else if (statement.contains()){
-
-        }
-        else if (findWord(statement, "mother") >= 0
+            if (statement.contains("I want to")) {
+                response = (transformIWantToStatement(statement));
+            }else{
+                response = (transformIWantStatement(statement));
+            }
+        }else if (statement.contains("I") && statement.contains("you")){
+            if (statement.indexOf("you") - statement.indexOf("I") > -10){
+                response = (transformIYouStatement(statement));
+            }
+        }else if (statement.contains("you") && statement.contains("me")) {
+            if (statement.indexOf("me") - statement.indexOf("you") > -10) {
+                response = (transformYouMeStatement(statement));
+            }
+        }else if (findWord(statement, "mother") >= 0
                 || findWord(statement, "father") >= 0
                 || findWord(statement, "sister") >= 0
                 || findWord(statement, "brother") >= 0){
             response = "Tell me more about your family.";
         }else if (findWord(statement, "cat")>=0
         ||findWord (statement, "dog") >=0){
-            System.out.println("Tell me more about your pets.");
+            response = ("Tell me more about your pets.");
         }else if (findWord(statement, "Mr.") >= 0
         || findWord(statement, "Miss.") >= 0
         || findWord(statement, "Mrs.") >= 0){
-        System.out.println("He sounds like a good teacher.");
+        response = ("He sounds like a good teacher.");
         }else if (statement.trim() == ""){
-            System.out.println("Say something, please.");
+            response = ("Say something, please.");
         }else if (statement.trim() == " "){
-            System.out.println("Say something, please.");
+            response = ("Say something, please.");
         } else if (findWord(statement, "sport") >= 0){
-            System.out.println("Sports suck!");
+            response = ("Sports suck!");
         } else if (findWord(statement, "yes")>=0){
-            System.out.println("Ok.");
+            response = ("Ok.");
         }else if (findWord(statement, "friend")>=0){
-            System.out.println("I wished I had a friend...");
-        }
-        else
-        {
+            response = ("I wished I had a friend...");
+        } else {
             response = getRandomResponse();
         }
         return response;
@@ -161,8 +168,9 @@ public class Magpie
      */
     public String transformIWantToStatement(String statement)
     {
-        // your code here
-        return "";
+        int a = statement.indexOf("I want");
+        String out = statement.substring(a+9);
+        return "What would it mean to" + out + "?";
     }
 
 
@@ -176,7 +184,9 @@ public class Magpie
      */
     public String transformYouMeStatement(String statement)
     {
-        // your code here
-        return "";
+        int a = statement.indexOf("you");
+        int b = statement.indexOf("me");
+        String out = statement.substring(a+4,b);
+        return "What makes you think that I " + out + "you?";
     }
 }
