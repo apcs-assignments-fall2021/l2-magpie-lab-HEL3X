@@ -37,6 +37,10 @@ public class Magpie
         if (findWord(statement, "no") >= 0)
         {
             response = "Why so negative?";
+        }else if (statement.contains("I want")){
+            System.out.println(transformIWantStatement(statement));
+        }else if (statement.contains()){
+
         }
         else if (findWord(statement, "mother") >= 0
                 || findWord(statement, "father") >= 0
@@ -56,8 +60,8 @@ public class Magpie
             System.out.println("Say something, please.");
         } else if (findWord(statement, "sport") >= 0){
             System.out.println("Sports suck!");
-        } else if (findWord(statement, "you")>=0){
-            System.out.println("I know...");
+        } else if (findWord(statement, "yes")>=0){
+            System.out.println("Ok.");
         }else if (findWord(statement, "friend")>=0){
             System.out.println("I wished I had a friend...");
         }
@@ -130,8 +134,8 @@ public class Magpie
      */
     public String transformIWantStatement(String statement)
     {
-        int a = statement.indexOf("want");
-        String out = statement.substring(a+4);
+        int a = statement.indexOf("I want");
+        String out = statement.substring(a+6);
         return "Would you really be happy if you had" + out + "?";
     }
 
@@ -143,8 +147,10 @@ public class Magpie
      */
     public String transformIYouStatement(String statement)
     {
-        //your code here
-        return "";
+        int a = statement.indexOf("I");
+        int b = statement.indexOf("you");
+        String out = statement.substring(a+2,b);
+        return "Why do you " + out + "me?";
     }
 
     /**
