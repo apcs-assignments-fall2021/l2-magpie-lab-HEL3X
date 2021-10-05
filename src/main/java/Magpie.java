@@ -1,3 +1,5 @@
+import sun.jvm.hotspot.HelloWorld;
+
 import java.util.Locale;
 import java.util.function.DoubleToIntFunction;
 
@@ -58,21 +60,35 @@ public class Magpie
             response = "Tell me more about your family.";
         }else if (findWord(statement, "cat")>=0
         ||findWord (statement, "dog") >=0){
-            response = ("Tell me more about your pets.");
+            response = "Tell me more about your pets.";
         }else if (findWord(statement, "Mr.") >= 0
         || findWord(statement, "Miss.") >= 0
         || findWord(statement, "Mrs.") >= 0){
-        response = ("He sounds like a good teacher.");
+        response = "He sounds like a good teacher.";
         }else if (statement.trim() == ""){
-            response = ("Say something, please.");
+            response = "Say something, please.";
         }else if (statement.trim() == " "){
-            response = ("Say something, please.");
-        } else if (findWord(statement, "sport") >= 0){
-            response = ("Sports suck!");
-        } else if (findWord(statement, "yes")>=0){
-            response = ("Ok.");
+            response = "Say something, please.";
+        }else if (findWord(statement, "hello")>=0){
+            response = "Hello!";
+        }else if (findWord(statement, "sport") >= 0){
+            response = "Sports suck!";
+        }else if (findWord(statement, "how are you")>=0){
+            response = "I'm doing well, thanks!";
+        }else if (findWord(statement, "yes")>=0){
+            response = "Ok.";
+        }else if (findWord(statement, "my birthday") >=0){
+            response = "Happy Birthday!";
+        }else if (findWord(statement, "my name is")>=0){
+        response = myNameIsGreet(statement);
+        }else if (findWord(statement, "your birthday")>=0){
+            response = "My birthday is 10/4/2021! Just two days earlier than Nicolas' birthday!";
+        }else if (findWord(statement, "world")>=0){
+        response = "One of these days the world will say hello back...";
+        }else if (findWord(statement, "como estas")>=0){
+                response = "Estoy bien, y tu?";
         }else if (findWord(statement, "friend")>=0){
-            response = ("I wished I had a friend...");
+            response = "I wished I had a friend...";
         } else {
             response = getRandomResponse();
         }
@@ -124,7 +140,7 @@ public class Magpie
     // The method returns the index of the first character in word
     // if it is found, and returns -1 otherwise. 
     public int findWord(String str, String word) {
-        if (str.toLowerCase().contains(word + " ") || str.toLowerCase().contains(word + ".") || str.toLowerCase().contains(word + ",") || str.toLowerCase().contains(" " + word)){
+        if (str.toLowerCase().equals(word) || str.toLowerCase().contains(word + " ") || str.toLowerCase().contains(word + ".") || str.toLowerCase().contains(word + ",") || str.toLowerCase().contains(" " + word) || str.toLowerCase().contains(word + "?") || str.toLowerCase().contains(word + "!")){
             return str.toLowerCase().indexOf(word);
         }
         return -1;
@@ -189,4 +205,15 @@ public class Magpie
         String out = statement.substring(a+4,b);
         return "What makes you think that I " + out + "you?";
     }
+
+
+    /**
+     * My Method(s)
+     */
+    public String myNameIsGreet(String statement){
+        int a = statement.toLowerCase().indexOf("my name is");
+        String out = statement.substring(a+10);
+        return "Hello" + out + "!";
+    }
+
 }
